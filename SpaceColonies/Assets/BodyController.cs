@@ -31,7 +31,7 @@ public class BodyController : MonoBehaviour {
             float random_color = Random.Range(0f,1f);
             data.bottom_color = colors_star.Evaluate(random_color);
             data.initial_size = (random_color+1)*2;
-            data.children_count = Random.Range(3,12);
+            data.children_count = Random.Range(3,5);
             //data.children_count = 1;
         } else if(child_type == "Planet") {
             float random_bottom_color = Random.Range(0f,1f);
@@ -42,7 +42,7 @@ public class BodyController : MonoBehaviour {
             data.initial_size = (random_size+1)/2;
             data.orbit_velocity = 0.05f;
             data.orbit_radius = 100;
-            data.children_count = Random.Range(-2,3);
+            data.children_count = Random.Range(-0,6);
             //data.children_count = 1;
         } else if(child_type == "Moon") {
             float random_bottom_color = Random.Range(0f,1f);
@@ -52,8 +52,8 @@ public class BodyController : MonoBehaviour {
             float random_size = Random.Range(0f,1f);
             data.initial_size = (random_size+1)/4;
             data.orbit_velocity = 1;
-            data.orbit_radius = 20;
-            data.children_count = Random.Range(-2,3);
+            data.orbit_radius = 15;
+            data.children_count = Random.Range(-1,5);
             //data.children_count = 0;
         } else {
             float random_bottom_color = Random.Range(0f,1f);
@@ -63,7 +63,7 @@ public class BodyController : MonoBehaviour {
             float random_size = Random.Range(0f,1f);
             data.initial_size = (random_size+1)/8;
             data.orbit_velocity = 2;
-            data.orbit_radius = 4;
+            data.orbit_radius = 3;
             //data.children_count = Random.Range(-2,3);
             data.children_count = 0;
         }

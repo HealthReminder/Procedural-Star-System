@@ -56,9 +56,11 @@ public class BodyBehaviour : MonoBehaviour
             orbitator.following = transform;
             new_body.transform.position = transform.position;
             new_body.transform.parent = orbitator.transform;
-            orbitator.transform.localRotation = Quaternion.Euler(0,Random.Range(0,360f),0);
-            print("ROTATION = "+orbitator.transform.rotation.y);
-            new_body.transform.position = transform.position + new Vector3(0,0,new_body.data.orbit_radius*current_orbit);
+            new_body.transform.position = transform.position + new Vector3(0,0,(new_body.data.orbit_radius*current_orbit)+2);
+            //float rand = Random.Range(0,4);
+            //float rand2 = Random.Range(0f,90f);
+            float rand = Random.Range(-360f,360f);
+            orbitator.transform.localRotation = Quaternion.Euler(0,rand,0);
 
 
             current_orbit++;
@@ -73,7 +75,7 @@ public class BodyBehaviour : MonoBehaviour
         if(type == "Star")
             yield break;
 
-        continentQuantity = Random.Range(-2,15);
+        continentQuantity = Random.Range(-2,9);
         if(continentQuantity <= 0)
             yield break;
             
@@ -82,8 +84,8 @@ public class BodyBehaviour : MonoBehaviour
         for (int i = 0; i < continentQuantity; i++)
         {
             Vector3 newContinentPosition = new Vector3(0,0,0);
-            newContinentPosition.x = Random.Range(-maxX,maxX)*scale;
-            newContinentPosition.y = Random.Range(-maxY,maxY)*scale;
+            newContinentPosition.x = Random.Range(-maxX-2,maxX+2)*scale;
+            newContinentPosition.y = Random.Range(-maxY-2,maxY+2)*scale;
             Transform newContinent = Instantiate(continent_prefab,
             transform.position, object_appearance.transform.rotation).transform;
             newContinent.parent = object_appearance.transform;

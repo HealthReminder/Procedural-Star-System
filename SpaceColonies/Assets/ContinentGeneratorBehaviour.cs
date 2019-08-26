@@ -16,7 +16,7 @@ public class ContinentGeneratorBehaviour : MonoBehaviour
         float parent_scale = transform.parent.localScale.x;
 
         coast_roughness = Random.Range(0.05f,0.3f);
-        initial_size = Random.Range(0.1f*parent_scale,0.4f*parent_scale)*parent_scale;
+        initial_size = Random.Range(0.1f*parent_scale,0.8f*parent_scale)*parent_scale;
         
 
         Transform root = transform.GetChild(0);
