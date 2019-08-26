@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 363565794}
   - component: {fileID: 363565795}
   - component: {fileID: 363565796}
+  - component: {fileID: 363565797}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Focusable
@@ -149,9 +150,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363565790}
   m_Enabled: 1
-  m_SortingLayerID: -216732383
-  m_SortingLayer: 2
-  m_SortingOrder: 100
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!331 &363565792
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -282,13 +283,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1de4486b2ba64e90cbd0ccf47c8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxY: 5
-  maxX: 15
-  continentQuantity: 0
-  continentPrefab: {fileID: 7711173379820082829, guid: ae1fe3b18f8a590489910c7d17e3876b,
-    type: 3}
-  bottom_color: {r: 0.5058824, g: 0.80392164, b: 1, a: 1}
-  upper_color: {r: 0.6096476, g: 0.9433962, b: 0.6266212, a: 1}
+  type: 
+  data:
+    initial_size: 0
+    bottom_color: {r: 0, g: 0, b: 0, a: 0}
+    upper_color: {r: 0, g: 0, b: 0, a: 0}
+    children_count: 0
+  orbiting: {fileID: 0}
 --- !u!135 &363565796
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -302,6 +303,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5.12
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &363565797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363565790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1985a2ae9bb630a43b89fcae89df948b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 363565794}
 --- !u!1 &495508546
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +413,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -414,6 +429,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d0acc34974bf241861361bc664d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 10
+  fastMovementSpeed: 100
+  freeLookSensitivity: 3
+  zoomSensitivity: 10
+  fastZoomSensitivity: 50
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -439,8 +471,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 117
+  orthographic: 0
   orthographic size: 13
   m_Depth: -1
   m_CullingMask:
@@ -641,6 +673,7 @@ GameObject:
   - component: {fileID: 914325000}
   - component: {fileID: 914324999}
   - component: {fileID: 914325004}
+  - component: {fileID: 914325005}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Focusable
@@ -660,13 +693,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1de4486b2ba64e90cbd0ccf47c8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxY: 5
-  maxX: 15
-  continentQuantity: 0
-  continentPrefab: {fileID: 7711173379820082829, guid: ae1fe3b18f8a590489910c7d17e3876b,
-    type: 3}
-  bottom_color: {r: 0.6313726, g: 0.6313726, b: 0.6313726, a: 1}
-  upper_color: {r: 0.49056602, g: 0.47899607, b: 0.47899607, a: 1}
+  type: 
+  data:
+    initial_size: 0
+    bottom_color: {r: 0, g: 0, b: 0, a: 0}
+    upper_color: {r: 0, g: 0, b: 0, a: 0}
+    children_count: 0
+  orbiting: {fileID: 0}
 --- !u!212 &914325000
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -725,8 +758,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914324998}
   m_Enabled: 1
-  m_SortingLayerID: -642411925
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!331 &914325002
 SpriteMask:
@@ -809,6 +842,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5.1200004
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &914325005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914324998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1985a2ae9bb630a43b89fcae89df948b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 914325000}
 --- !u!1 &1954959931
 GameObject:
   m_ObjectHideFlags: 0

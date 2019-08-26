@@ -37,10 +37,10 @@ public class PlayerView : MonoBehaviour
         is_camera_moving = true;
 
 
-        Vector3 new_position = aligning_to.position;
+        Vector3 new_position;
         Quaternion new_rotation;
         if(aligning_to != null){
-            new_position = new Vector3(new_position.x,new_position.y,-20);
+            new_position = new Vector3(aligning_to.position.x,aligning_to.position.y,-20);
             new_rotation = Quaternion.FromToRotation(player_camera.transform.up, aligning_to.up) * player_camera.transform.rotation;
         } else {
             new_position = new Vector3(0,0,-20);
