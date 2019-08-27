@@ -241,6 +241,10 @@ MonoBehaviour:
   object_appearance: {fileID: 1982741680}
   orbiting: {fileID: 0}
   trail: {fileID: 1246636993}
+  maxY: 5
+  maxX: 15
+  continents: []
+  scale: 0
 --- !u!96 &1246636993
 TrailRenderer:
   serializedVersion: 2
@@ -284,7 +288,7 @@ TrailRenderer:
   m_Time: 50
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:

@@ -18,11 +18,11 @@ public class BodyBehaviour : MonoBehaviour
     public GameObject object_appearance;
     public Transform orbiting;
     public TrailRenderer trail;
-    float maxY = 5;
-    float maxX = 15;
     int continentQuantity = 0;
-    Transform[] continents;
-    float scale;
+    [HideInInspector] public float maxY = 5;
+    [HideInInspector] public float maxX = 15;
+    [HideInInspector] public Transform[] continents;
+    [HideInInspector] public float scale;
     private void Start() {
         StartCoroutine(Behaviour());
     }
@@ -36,10 +36,12 @@ public class BodyBehaviour : MonoBehaviour
         yield return GenerateContinents();
         yield return GenerateChildren();
         if(trail){
-            trail.startColor = data.upper_color;
-            trail.endColor = data.bottom_color;
+            trail.startColor = data.upper_color + new Color(0,0,0,-0.5f);
+            trail.endColor = data.bottom_color+ new Color(0,0,0,-0.5f);
             trail.time = data.trail_duration;
+            trail.startWidth = data.initial_size*10;
         }
+        PerformanceManager.instance.land_movement.Add(this);
         Debug.Log("Finished behaviour of "+type);
         yield break;
     }
@@ -57,18 +59,22 @@ public class BodyBehaviour : MonoBehaviour
                                     Quaternion.identity).GetComponent<BodyBehaviour>();
             BodyController.instance.SetupBody(new_body,type);
             new_body.gameObject.name = new_body.type;
-            orbitator.rotation_vector = new Vector3(0,Random.Range(-1f,1f)*new_body.data.orbit_velocity,0);
+            Vector3 orbit_rotation_vector = new Vector3(Random.Range(-0.3f,0.3f)*new_body.data.orbit_velocity,
+            Random.Range(-1f,1f)*new_body.data.orbit_velocity,
+            0);
+            orbitator.rotation_vector = orbit_rotation_vector;
             orbitator.transform.position = transform.position;
             orbitator.following = transform;
             new_body.transform.position = transform.position;
             new_body.transform.parent = orbitator.transform;
             new_body.transform.position = transform.position + new Vector3(0,0,(new_body.data.orbit_radius*current_orbit)+2);
-            float rand = Random.Range(0,4);
-            float rand2 = Random.Range(0f,90f);
-            //float rand = Random.Range(-360f,360f);
-            orbitator.transform.localRotation = Quaternion.Euler(0,rand*rand2,0);
-
-
+            print("Old pos "+orbitator.transform.localRotation);
+            float rand1 = Random.Range(-360f,360f);
+            float rand2 = Random.Range(-360f,360f);
+            orbitator.transform.localRotation = Quaternion.Euler(orbit_rotation_vector.x*rand1*100,
+            orbit_rotation_vector.y*rand2*100,
+            0);
+            print("New pos "+orbitator.transform.localRotation);
             current_orbit++;
         }
         yield return null;
@@ -81,7 +87,7 @@ public class BodyBehaviour : MonoBehaviour
         if(type == "Star")
             yield break;
 
-        continentQuantity = Random.Range(-2,9);
+        continentQuantity = Random.Range(-2-(int)data.initial_size,9+(int)data.initial_size);
         if(continentQuantity <= 0)
             yield break;
             
@@ -101,24 +107,5 @@ public class BodyBehaviour : MonoBehaviour
         }
         print("Generated continents");
         yield break;
-    }
-    private void Update() {
-        FakePlanetRotation();
-    }
-    void FakePlanetRotation() {
-        if(continents == null)
-            return;
-        if(continents.Length <= 0)
-            return;
-        //This is the movement of the continents
-        for (int c = 0; c < continents.Length; c++)
-        {
-            Transform movingNow = continents[c];
-            if(movingNow == null)
-                return;
-            movingNow.localPosition+= new Vector3(0.1f,0,0);
-            if(movingNow.localPosition.x > (maxX*scale)+(2/scale))
-                movingNow.localPosition = new Vector3(-(maxX*scale)-(2/scale),movingNow.localPosition.y,movingNow.localPosition.z);
-        }
     }
 }

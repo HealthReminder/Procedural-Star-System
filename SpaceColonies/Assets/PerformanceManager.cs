@@ -43,6 +43,25 @@ public class PerformanceManager : MonoBehaviour
                 c.transform.LookAt(player_transform.position, -Vector3.up);
                 c.sortingOrder = (int)Vector3.Distance(transform.position,player_transform.position)*-1;                
             }
+            BodyBehaviour b;
+            for (i = land_movement.Count-1; i >= 0; i--){
+                b = land_movement[i]; 
+                if(b.continents == null)
+                    land_movement.RemoveAt(i);
+                else if(b.continents.Length <= 0)
+                    land_movement.RemoveAt(i);
+                else {
+                    Transform[] con = b.continents;
+                    for (int x = 0; x < con.Length; x++) {
+                        Transform movingNow = con[x];
+                        if(movingNow != null){
+                            movingNow.localPosition+= new Vector3(0.1f*simulation_speed,0,0);
+                            if(movingNow.localPosition.x > (b.maxX*b.scale)+(2/b.scale))
+                                movingNow.localPosition = new Vector3(-(b.maxX*b.scale)-(2/b.scale),movingNow.localPosition.y,movingNow.localPosition.z);
+                        }
+                    }   
+                }
+            }
             //yield return new WaitForSeconds(1/performance_percentage*Time.deltaTime);
             yield return null;
         }

@@ -30,7 +30,7 @@ public class BodyController : MonoBehaviour {
         if(child_type == "Star") {
             float random_color = Random.Range(0f,1f);
             data.bottom_color = colors_star.Evaluate(random_color);
-            data.initial_size = Mathf.Pow(((random_color*random_color)*2)+1,2);
+            data.initial_size = Mathf.Pow(((random_color*random_color)*2)+2,2);
             data.children_count = Random.Range(3,5);
             //data.children_count = 1;
         } else if(child_type == "Planet") {

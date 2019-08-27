@@ -428,13 +428,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693165531}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05d0acc34974bf241861361bc664d135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  fastMovementSpeed: 100
+  movementSpeed: 80
+  fastMovementSpeed: 500
   freeLookSensitivity: 3
   zoomSensitivity: 10
   fastZoomSensitivity: 50
