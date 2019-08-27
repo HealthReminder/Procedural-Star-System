@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 4833771012662087397}
   - component: {fileID: 4628550556091967429}
   - component: {fileID: 130722461876321898}
+  - component: {fileID: 6652555930346847515}
   m_Layer: 0
   m_Name: Appearance
-  m_TagString: Untagged
+  m_TagString: Focusable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1982741682
 RectTransform:
@@ -162,6 +163,22 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!58 &6652555930346847515
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982741680}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.12
 --- !u!1 &1066357578337988004
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,14 +189,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1066357578337987997}
   - component: {fileID: 1066357578337987994}
-  - component: {fileID: 1066357578337988007}
   - component: {fileID: 1246636993}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Focusable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1066357578337987997
 RectTransform:
@@ -221,21 +237,10 @@ MonoBehaviour:
     bottom_color: {r: 0, g: 0, b: 0, a: 0}
     upper_color: {r: 0, g: 0, b: 0, a: 0}
     children_count: 0
+    trail_duration: 0
   object_appearance: {fileID: 1982741680}
   orbiting: {fileID: 0}
---- !u!135 &1066357578337988007
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066357578337988004}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5.12
-  m_Center: {x: 0, y: 0, z: 0}
+  trail: {fileID: 1246636993}
 --- !u!96 &1246636993
 TrailRenderer:
   serializedVersion: 2
@@ -276,7 +281,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -32768
-  m_Time: 5
+  m_Time: 50
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5

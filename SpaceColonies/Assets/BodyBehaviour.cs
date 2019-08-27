@@ -9,6 +9,7 @@ using UnityEngine;
     public Color bottom_color;
     public Color upper_color;
     public int children_count;
+    public float trail_duration;
 }
 public class BodyBehaviour : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class BodyBehaviour : MonoBehaviour
     [SerializeField] public BodyData data;
     public GameObject object_appearance;
     public Transform orbiting;
+    public TrailRenderer trail;
     float maxY = 5;
     float maxX = 15;
     int continentQuantity = 0;
@@ -23,7 +25,6 @@ public class BodyBehaviour : MonoBehaviour
     float scale;
     private void Start() {
         StartCoroutine(Behaviour());
-        
     }
     IEnumerator Behaviour() {
         if(type == "Star")
@@ -34,6 +35,11 @@ public class BodyBehaviour : MonoBehaviour
         scale = transform.lossyScale.x;
         yield return GenerateContinents();
         yield return GenerateChildren();
+        if(trail){
+            trail.startColor = data.upper_color;
+            trail.endColor = data.bottom_color;
+            trail.time = data.trail_duration;
+        }
         Debug.Log("Finished behaviour of "+type);
         yield break;
     }
@@ -45,22 +51,22 @@ public class BodyBehaviour : MonoBehaviour
         for (int i = 0; i < data.children_count; i++)
         {
             GameObject orbitator_object = new GameObject("Orbitator "+current_orbit);
-            OrbitatorBehaviour orbitator = orbitator_object.AddComponent<OrbitatorBehaviour>();
+            OrbitData orbitator = orbitator_object.AddComponent<OrbitData>();
             BodyBehaviour new_body = Instantiate(BodyController.instance.bodyPrefab, 
                                     transform.position,
                                     Quaternion.identity).GetComponent<BodyBehaviour>();
             BodyController.instance.SetupBody(new_body,type);
             new_body.gameObject.name = new_body.type;
-            orbitator.rotation_vector = new Vector3(0,Random.Range(0.1f,1f)*new_body.data.orbit_velocity,0);
+            orbitator.rotation_vector = new Vector3(0,Random.Range(-1f,1f)*new_body.data.orbit_velocity,0);
             orbitator.transform.position = transform.position;
             orbitator.following = transform;
             new_body.transform.position = transform.position;
             new_body.transform.parent = orbitator.transform;
             new_body.transform.position = transform.position + new Vector3(0,0,(new_body.data.orbit_radius*current_orbit)+2);
-            //float rand = Random.Range(0,4);
-            //float rand2 = Random.Range(0f,90f);
-            float rand = Random.Range(-360f,360f);
-            orbitator.transform.localRotation = Quaternion.Euler(0,rand,0);
+            float rand = Random.Range(0,4);
+            float rand2 = Random.Range(0f,90f);
+            //float rand = Random.Range(-360f,360f);
+            orbitator.transform.localRotation = Quaternion.Euler(0,rand*rand2,0);
 
 
             current_orbit++;

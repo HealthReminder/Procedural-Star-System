@@ -44,7 +44,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7711173378779347458
 Transform:
@@ -335,7 +335,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &7711173379820082828
 RectTransform:
@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Bounds:
     m_Center: {x: -0.05809307, y: -0.101531506, z: 0}
     m_Extent: {x: 6.4042354, y: 6.402786, z: 0}
+  timer: 1.0108147
 --- !u!114 &7711173379820082824
 MonoBehaviour:
   m_ObjectHideFlags: 0
