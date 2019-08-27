@@ -39,13 +39,13 @@ public class BodyController : MonoBehaviour {
             float random_upper_color = Random.Range(0f,1f);
             data.upper_color = colors_upper.Evaluate(random_upper_color);
             float random_size = Random.Range(0f,1f);
-            data.initial_size = (random_size+1)/2;
+            data.initial_size = (random_size+1)/1;
             data.orbit_velocity = 0.01f;
             data.orbit_radius = 250;
-            data.children_count = Random.Range(-0,5);
             data.trail_duration = 60;
 
-            data.children_count = 5;
+            data.children_count = Random.Range(-0,5);
+            //data.children_count = 5;
         } else if(child_type == "Moon") {
             float random_bottom_color = Random.Range(0f,1f);
             data.bottom_color = colors_bottom.Evaluate(random_bottom_color);
@@ -58,14 +58,14 @@ public class BodyController : MonoBehaviour {
             data.trail_duration = 10;
 
             data.children_count = Random.Range(-1,3);
-            data.children_count = 3;
+            //data.children_count = 3;
         } else {
             float random_bottom_color = Random.Range(0f,1f);
             data.bottom_color = colors_bottom.Evaluate(random_bottom_color);
             float random_upper_color = Random.Range(0f,1f);
             data.upper_color = colors_upper.Evaluate(random_upper_color);
             float random_size = Random.Range(0f,1f);
-            data.initial_size = (random_size+1)/8;
+            data.initial_size = (random_size+1)/12;
             data.orbit_velocity = 0.5f;
             data.orbit_radius = 3f;
             data.trail_duration = 2;

@@ -117,8 +117,8 @@ public class BodyBehaviour : MonoBehaviour
             if(movingNow == null)
                 return;
             movingNow.localPosition+= new Vector3(0.1f,0,0);
-            if(movingNow.localPosition.x > maxX)
-                movingNow.localPosition = new Vector3(-(maxX*scale*2),movingNow.localPosition.y,movingNow.localPosition.z);
+            if(movingNow.localPosition.x > (maxX*scale)+(2/scale))
+                movingNow.localPosition = new Vector3(-(maxX*scale)-(2/scale),movingNow.localPosition.y,movingNow.localPosition.z);
         }
     }
 }

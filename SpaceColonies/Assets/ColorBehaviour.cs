@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColorBehaviour : MonoBehaviour
 {
+    public float alpha_change;
     public SpriteRenderer light_appearance;
     SpriteRenderer spriteRenderer;
     void Start()
@@ -15,7 +16,7 @@ public class ColorBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.color = light_appearance.color;
-        spriteRenderer.color += new Color(0,0,0,-0.4f);
-        transform.localScale = light_appearance.transform.localScale*10;
+        spriteRenderer.color -= new Color(0,0,0,1-alpha_change);
+        //transform.localScale = light_appearance.transform.localScale*10;
     }
 }
