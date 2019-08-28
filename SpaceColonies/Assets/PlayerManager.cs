@@ -13,21 +13,22 @@ public class PlayerManager : MonoBehaviour
             OnRightMouse();
     }
     public void OnRightMouse() {
-        PlayerView.instance.UnfocusPlanet();
+        //PlayerView.instance.UnfocusPlanet();
         current_focused = null;
     }
     public void OnLeftMouse() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Debug.DrawRay(Camera.main.transform.position,ray.direction*100,Color.white,5);
-        if (Physics.Raycast(ray, out hit, 100)) {
-            Debug.Log(hit.transform.name);
+        if (Physics.Raycast(ray, out hit, 10000)) {
+            Debug.Log("Clicked on "+hit.transform.name);
             Debug.DrawRay(transform.position,ray.direction*100,Color.red,5);
             if(hit.transform.tag == "Focusable") {
                 if(current_focused == hit.transform)
                     return;
                 current_focused = hit.transform;
-                PlayerView.instance.FocusOnPlanet(hit.transform);
+                //PlayerView.instance.FocusOnPlanet(hit.transform);
+                StartCoroutine(CameraBehaviour.instance.FocusTransform(current_focused));
             }
         }
     }

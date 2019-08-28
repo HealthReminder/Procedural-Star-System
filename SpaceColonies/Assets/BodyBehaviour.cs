@@ -30,7 +30,7 @@ public class BodyBehaviour : MonoBehaviour
         if(type == "Star")
             BodyController.instance.SetupBody(this,"Root");
         yield return null;
-        print("Starting generation for "+type);
+        //print("Starting generation for "+type);
         transform.localScale = Vector3.one*data.initial_size;
         scale = transform.lossyScale.x;
         yield return GenerateContinents();
@@ -42,7 +42,7 @@ public class BodyBehaviour : MonoBehaviour
             trail.startWidth = data.initial_size*10;
         }
         PerformanceManager.instance.land_movement.Add(this);
-        Debug.Log("Finished behaviour of "+type);
+        //Debug.Log("Finished behaviour of "+type);
         yield break;
     }
     IEnumerator GenerateChildren() {
@@ -78,7 +78,7 @@ public class BodyBehaviour : MonoBehaviour
             current_orbit++;
         }
         yield return null;
-        print("Generated children");
+        //print("Generated children");
         yield break;
     }
     
