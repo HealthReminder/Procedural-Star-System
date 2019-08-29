@@ -6,8 +6,26 @@ public class CameraBehaviour : MonoBehaviour
 {
     bool is_focusing = false;
     bool can_zoom = true;
+    bool can_orbit = true;
     public Transform focusing_transform;
     public AnimationCurve smooth_curve;
+
+    public void Orbit() {
+        //if(!can_orbit || focusing_transform == null)
+        //    return;
+        //Vector3 mouse_pos = Input.mousePosition;
+        //Vector3 rotation_vector = new Vector3(mouse_pos.y-Screen.height/2,mouse_pos.x-Screen.width/2,0).normalized;
+        //print(rotation_vector);
+        //transform.RotateAround(focusing_transform.position,mouse_pos,2f);
+        //if(rotation_vector.x < 0)
+        //    transform.RotateAround (focusing_transform.position, focusing_transform.right, 100 * Time.deltaTime);
+        //else if(rotation_vector.x > 0)
+        //    transform.RotateAround (focusing_transform.position, -focusing_transform.right, 100 * Time.deltaTime);
+        //if(rotation_vector.y < 0)
+        //    transform.RotateAround (focusing_transform.position, focusing_transform.up, 100 * Time.deltaTime);
+        //else if(rotation_vector.y > 0)
+        //    transform.RotateAround (focusing_transform.position, -focusing_transform.up, 100 * Time.deltaTime);
+    }
 
     float zoom_prog = 0.1f;
     bool is_positive = true;
@@ -15,7 +33,7 @@ public class CameraBehaviour : MonoBehaviour
         if(!can_zoom || focusing_transform == null)
             return;
 
-        float max_distance = 250;
+        float max_distance = 500;
         float min_distance = 10;
         float movement_velocity = 20;
         float current_distance = Vector3.Distance(transform.position, focusing_transform.position);
@@ -47,6 +65,7 @@ public class CameraBehaviour : MonoBehaviour
         is_focusing = true;
 
         can_zoom = false;
+        can_orbit = false;
         focusing_transform = focus_on;
 
         //Free camera
@@ -86,6 +105,7 @@ public class CameraBehaviour : MonoBehaviour
             yield return null;
         }
         can_zoom = true;
+        can_orbit = true;
         yield break;
     }
 

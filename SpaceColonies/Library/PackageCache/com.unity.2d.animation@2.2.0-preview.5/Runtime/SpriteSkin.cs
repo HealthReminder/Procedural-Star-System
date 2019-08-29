@@ -101,11 +101,8 @@ namespace UnityEngine.Experimental.U2D.Animation
                 m_DeformedVertices.Dispose();
         }
 
-        public float timer = 0;
         void LateUpdate()
         {
-            if(timer >= 1)
-                return;
 #if ENABLE_ENTITIES
             if(entitiesEnabled)
                 return;
@@ -128,7 +125,6 @@ namespace UnityEngine.Experimental.U2D.Animation
                     m_CurrentDeformSprite = sprite;
                 }
             }
-            timer += Time.deltaTime;
         }
 
         internal Sprite sprite
