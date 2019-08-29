@@ -5,17 +5,54 @@ using UnityEngine;
 public class CameraBehaviour : MonoBehaviour
 {
     bool is_focusing = false;
-    public Transform focusingTest;
+    bool can_zoom = true;
+    public Transform focusing_transform;
     public AnimationCurve smooth_curve;
+
+    float zoom_prog = 0.1f;
+    bool is_positive = true;
+    public void Zoom(float rate) {
+        if(!can_zoom || focusing_transform == null)
+            return;
+
+        float max_distance = 250;
+        float min_distance = 10;
+        float movement_velocity = 20;
+        float current_distance = Vector3.Distance(transform.position, focusing_transform.position);
+        if(rate > 0) {
+            if(!is_positive) {
+                is_positive = true;
+                zoom_prog = 0.1f;
+            }
+            if(current_distance > min_distance) {
+                transform.position = zoom_prog*transform.forward*movement_velocity + transform.position;
+                if(zoom_prog < 1)
+                    zoom_prog += Time.deltaTime;
+            }
+        } else {
+            if(is_positive) {
+                is_positive = false;
+                zoom_prog = 0.1f;
+            }
+            if(current_distance < max_distance) {
+                transform.position = zoom_prog*transform.forward*-movement_velocity + transform.position;
+                if(zoom_prog < 1)
+                    zoom_prog += Time.deltaTime;
+            }
+        }
+    }
     public IEnumerator FocusTransform(Transform focus_on) {
         is_focusing = false;
         yield return null;
         is_focusing = true;
 
+        can_zoom = false;
+        focusing_transform = focus_on;
+
         //Free camera
         transform.parent = null;
         float ideal_distance = 100;
-
+        
         //Create references
         Vector3 target_vector = Vector3.zero;
         float percentage_rotation = 0;   
@@ -48,6 +85,7 @@ public class CameraBehaviour : MonoBehaviour
                 curve_progress+=0.01f;
             yield return null;
         }
+        can_zoom = true;
         yield break;
     }
 
