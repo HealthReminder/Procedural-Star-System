@@ -10,6 +10,10 @@ public class CameraBehaviour : MonoBehaviour
     public Transform focusing_transform;
     public AnimationCurve smooth_curve;
 
+    [Header("Movement")]
+    public float movementSpeed = 5f;
+    public float fastMovementSpeed = 50f;
+
     public static CameraBehaviour instance;
     private void Awake() {
         instance = this;
@@ -18,7 +22,7 @@ public class CameraBehaviour : MonoBehaviour
     float zoom_prog = 0.1f;
     bool is_positive = true;
     public void Zoom(float rate) {
-        if(!can_zoom || focusing_transform == null)
+        if(!can_zoom || !focusing_transform)
             return;
 
         float max_distance = 2000;
@@ -45,6 +49,41 @@ public class CameraBehaviour : MonoBehaviour
                 if(zoom_prog < 1)
                     zoom_prog += Time.deltaTime;
             }
+        }
+    }
+
+    private void Update() {
+        InputMovement();
+        transform.LookAt(focusing_transform.position);
+    }
+    void InputMovement() {
+        
+        bool fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        float movementSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
+    
+        //Depth
+        float sa = Input.GetAxis("Mouse ScrollWheel");
+        if (sa > 0f) 
+            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime * sa * 50);
+        else if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.UpArrow))
+            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime );
+
+        if (sa < 0f) 
+            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime  * sa * 50);
+        else if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.DownArrow))
+            transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
+        
+        //Left and Right
+        if (Input.GetAxis("Horizontal") != 0)
+            transform.position = transform.position + (transform.right * movementSpeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+
+        float va = Input.GetAxis("Vertical");
+        if (va > 0){
+            if(Vector3.Dot(transform.forward,Vector3.up) > -0.85f)
+                transform.position = transform.position + (transform.up * movementSpeed * Time.deltaTime * va);
+        }else if (va < 0){
+            if(Vector3.Dot(transform.forward,Vector3.up) < 0.85f)
+                transform.position = transform.position + (transform.up * movementSpeed * Time.deltaTime * va);
         }
     }
     public IEnumerator FocusTransform(Transform focus_on,float ideal_distance) {
@@ -97,23 +136,6 @@ public class CameraBehaviour : MonoBehaviour
         can_zoom = true;
         can_orbit = true;
         yield break;
-    }
-    
-    public void Orbit() {
-        //if(!can_orbit || focusing_transform == null)
-        //    return;
-        //Vector3 mouse_pos = Input.mousePosition;
-        //Vector3 rotation_vector = new Vector3(mouse_pos.y-Screen.height/2,mouse_pos.x-Screen.width/2,0).normalized;
-        //print(rotation_vector);
-        //transform.RotateAround(focusing_transform.position,mouse_pos,2f);
-        //if(rotation_vector.x < 0)
-        //    transform.RotateAround (focusing_transform.position, focusing_transform.right, 100 * Time.deltaTime);
-        //else if(rotation_vector.x > 0)
-        //    transform.RotateAround (focusing_transform.position, -focusing_transform.right, 100 * Time.deltaTime);
-        //if(rotation_vector.y < 0)
-        //    transform.RotateAround (focusing_transform.position, focusing_transform.up, 100 * Time.deltaTime);
-        //else if(rotation_vector.y > 0)
-        //    transform.RotateAround (focusing_transform.position, -focusing_transform.up, 100 * Time.deltaTime);
     }
 
 

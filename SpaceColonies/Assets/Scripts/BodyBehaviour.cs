@@ -87,7 +87,7 @@ public class BodyBehaviour : MonoBehaviour
         if(data.type == "Star")
             yield break;
 
-        continentQuantity = Random.Range(-2-(int)data.initial_size,9+(int)data.initial_size);
+        continentQuantity = Random.Range(-1-(int)data.initial_size,5+(int)data.initial_size);
         if(continentQuantity <= 0)
             yield break;
             

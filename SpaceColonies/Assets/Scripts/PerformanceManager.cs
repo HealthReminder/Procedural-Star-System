@@ -41,7 +41,23 @@ public class PerformanceManager : MonoBehaviour
             for (i = 0; i < renderer_order.Count; i++){
                 c = renderer_order[i];
                 c.transform.LookAt(player_transform.position, -Vector3.up);
-                c.sortingOrder = (int)Vector3.Distance(transform.position,player_transform.position)*-1;                
+                c.sortingOrder = (int)Vector3.Distance(transform.position,player_transform.position)*-1;   
+
+                Camera camera = Camera.main;
+                Vector3 r = camera.WorldToViewportPoint(c.transform.position);
+                bool is_on = c.gameObject.activeSelf;
+                if(!is_on) {
+                    if(r.z > 0.5f && r.x > -0.5f && r.x < 1.5f && r.y > -0.5f && r.y < 1.5f && 
+                    Vector3.Distance(player_transform.position,c.transform.position) < 3000 * c.transform.parent.transform.localScale.x){
+                        c.gameObject.SetActive(true);
+                        Debug.Log(Vector3.Distance(player_transform.position,c.transform.position));
+                    }
+                } else {
+                    if(!c.gameObject.GetComponent<TrailRenderer>())
+                        if(r.z < 0.5f || r.x < -0.5f || r.x > 1.5f || r.y < -0.5f || r.y > 1.5f || 
+                        Vector3.Distance(player_transform.position,c.transform.position) >= 3000 * c.transform.parent.transform.localScale.x)
+                            c.gameObject.SetActive(false);
+                }
             }
             BodyBehaviour b;
             for (i = land_movement.Count-1; i >= 0; i--){
@@ -55,12 +71,13 @@ public class PerformanceManager : MonoBehaviour
                     for (int x = 0; x < con.Length; x++) {
                         Transform movingNow = con[x];
                         if(movingNow != null){
-                            movingNow.localPosition+= new Vector3(0.1f*simulation_speed,0,0);
+                            movingNow.localPosition+= new Vector3(0.1f*simulation_speed/10,0,0);
                             if(movingNow.localPosition.x > (b.maxX*b.scale)+(2/b.scale))
                                 movingNow.localPosition = new Vector3(-(b.maxX*b.scale)-(2/b.scale),movingNow.localPosition.y,movingNow.localPosition.z);
                         }
                     }   
                 }
+
             }
             //yield return new WaitForSeconds(1/performance_percentage*Time.deltaTime);
             yield return null;

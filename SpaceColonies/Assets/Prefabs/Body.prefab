@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb1de4486b2ba64e90cbd0ccf47c8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: Star
   data:
+    type: 
     initial_size: 1
     orbit_radius: 0
     orbit_velocity: 0
